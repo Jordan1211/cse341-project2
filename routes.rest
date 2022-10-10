@@ -1,0 +1,17 @@
+//GENERAL APP ROUTES
+/////////////////////////////////////////////////////// WEEK 5
+
+//*****************LOCAL***************** 
+### Local app GET
+GET http://localhost:8000
+
+### Local app GET api docs
+GET http://localhost:8000/api-docs
+
+
+//*****************PRODUCTION***************** 
+###  App through render GET
+GET https://custody-api.onrender.com
+
+###  App through render GET api docs
+GET https://custody-api.onrender.com/api-docs

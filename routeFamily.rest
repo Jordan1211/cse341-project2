@@ -1,0 +1,47 @@
+//FAMILY ROUTES
+/////////////////////////////////////////////////////// WEEK 5
+
+//*****************LOCAL***************** 
+
+### Local app GET family records
+GET http://localhost:8000/family
+
+### Local app GET family specific family record
+GET http://localhost:8000/family/63445ca0455bdc607b51b34d
+
+### Local app POST family records
+POST http://localhost:8000/family
+Content-Type: application/json
+
+{
+  "familyName": "testFam",
+  "contracts": "any",
+  "childLastName": "John",
+  "childFirstName": "Test",
+  "childDOB": "2022-10-10",
+  "parent1userId": "any",
+  "parent2userId": "any",
+  "holidayId": "any"
+}
+//*****************PRODUCTION***************** 
+
+###  App through render GET family records
+GET https://custody-api.onrender.com/family
+
+###  App through render GET specific family record
+GET https://custody-api.onrender.com/family/63445ca0455bdc607b51b34d
+
+###  App through render POST family records
+POST https://custody-api.onrender.com/family
+Content-Type: application/json
+
+{
+  "familyName": "testFam",
+  "contracts": "any",
+  "childLastName": "John",
+  "childFirstName": "Test",
+  "childDOB": "2022-10-10",
+  "parent1userId": "any",
+  "parent2userId": "any",
+  "holidayId": "any"
+}

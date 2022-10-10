@@ -1,0 +1,37 @@
+//HOLIDAY ROUTES
+/////////////////////////////////////////////////////// WEEK 5
+
+//*****************LOCAL***************** 
+
+### Local app GET holiday records
+GET http://localhost:8000/holiday
+
+### Local app GET holiday specific holiday record
+GET http://localhost:8000/holiday/63446f7d2d0e51f7cfa00cb2
+
+### Local app POST holiday records
+POST http://localhost:8000/holiday
+Content-Type: application/json
+
+{
+  "name": "any",
+  "occurence": "any",
+  "group": "any"
+}
+//*****************PRODUCTION***************** 
+
+###  App through render GET holiday records
+GET https://custody-api.onrender.com/holiday
+
+###  App through render GET specific holiday record
+GET https://custody-api.onrender.com/holiday/63446f7d2d0e51f7cfa00cb2
+
+###  App through render POST holiday records
+POST https://custody-api.onrender.com/holiday
+Content-Type: application/json
+
+{
+  "name": "any",
+  "occurence": "any",
+  "group": "any"
+}

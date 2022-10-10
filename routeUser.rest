@@ -1,0 +1,43 @@
+//USER ROUTES
+/////////////////////////////////////////////////////// WEEK 5
+
+//*****************LOCAL***************** 
+
+### Local app GET user records
+GET http://localhost:8000/user
+
+### Local app GET user specific user record
+GET http://localhost:8000/user/63445d27455bdc607b51b34e
+
+### Local app POST user records
+POST http://localhost:8000/user
+Content-Type: application/json
+
+{
+  "firstName": "Johnny  ",
+  "lastName": "Test",
+  "userName": "JonTest1",
+  "email": "jtest@gmail.com",
+  "familyName": "Tests",
+  "notes": "any"
+}
+//*****************PRODUCTION***************** 
+
+###  App through render GET user records
+GET https://custody-api.onrender.com/user
+
+###  App through render GET specific user record
+GET https://custody-api.onrender.com/user/6344806e73107d84a56e20e5
+
+###  App through render POST user records
+POST https://custody-api.onrender.com/user
+Content-Type: application/json
+
+{
+  "firstName": "Johnny  ",
+  "lastName": "Test",
+  "userName": "JonTest1",
+  "email": "jtest@gmail.com",
+  "familyName": "Tests",
+  "notes": "any"
+}

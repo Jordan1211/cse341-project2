@@ -37,62 +37,62 @@ const createNewHoliday = async (req, res) => {
   }
 };
 
-// const updateById = async (req, res) => {
-//   try {
-//     const result = await mongodb
-//       .getDb()
-//       .db('contacts')
-//       .collection('contacts')
-//       .updateOne(
-//         { _id: ObjectId(req.params.id) },
-//         {
-//           $set: {
-//             favoriteColor: req.body.favoriteColor
-//           }
-//         }
-//       );
-//     console.log('Your update has been successful');
-//     res.setHeader('Content-Type', 'application/json');
-//     res.status(204).json(result);
-//   } catch (err) {
-//     res.status(500).json(response.error || 'Some error occurred while updating the contact.');
-//   }
-// };
+const updateById = async (req, res) => {
+  try {
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection('holiday')
+      .updateOne(
+        { _id: ObjectId(req.params.id) },
+        {
+          $set: {
+            favoriteColor: req.body.favoriteColor
+          }
+        }
+      );
+    console.log('Your update has been successful');
+    res.setHeader('Content-Type', 'application/json');
+    res.status(204).json(result);
+  } catch (err) {
+    res.status(500).json(response.error || 'Some error occurred while updating the holiday.');
+  }
+};
 
-// const deleteById = async (req, res) => {
-//   try {
-//     const result = await mongodb
-//       .getDb()
-//       .db('contacts')
-//       .collection('contacts')
-//       .deleteOne({ _id: ObjectId(req.params.id) });
-//     console.log('The contact was Deleted');
-//     res.setHeader('Content-Type', 'application/json');
-//     res.status(200).json(result);
-//   } catch (err) {
-//     res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
-//   }
-// };
+const deleteById = async (req, res) => {
+  try {
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection('holiday')
+      .deleteOne({ _id: ObjectId(req.params.id) });
+    console.log('The contact was Deleted');
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json(response.error || 'Some error occurred while deleting the holiday.');
+  }
+};
 
-// const deleteManyByName = async (req, res) => {
-//   try {
-//     const result = await mongodb
-//       .getDb()
-//       .db('contacts')
-//       .collection('contacts')
-//       .deleteMany({ firstName: req.body.firstName });
-//     res.setHeader('Content-Type', 'application/json');
-//     res.status(200).json(result);
-//   } catch (err) {
-//     res.status(500).json(response.error || 'Some error occurred while deleting the many contacts.');
-//   }
-// };
+const deleteManyByName = async (req, res) => {
+  try {
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection('holiday')
+      .deleteMany({ firstName: req.body.firstName });
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json(response.error || 'Some error occurred while deleting the many holidays.');
+  }
+};
 
 module.exports = {
   getData,
   getSingle,
-  createNewHoliday
-  //   updateById,
-  //   deleteById,
-  //   deleteManyByName
+  createNewHoliday,
+  updateById,
+  deleteById,
+  deleteManyByName
 };

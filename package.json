@@ -1,0 +1,35 @@
+{
+  "name": "cse341-project2",
+  "version": "1.0.0",
+  "description": "This is an independent project that you will complete as you do your personal assignments for lessons 5-8 in this course.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "node server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write --config ./.prettierrc.json",
+    "swagger": "node ./swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jordan1211/cse341-project2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jordan1211/cse341-project2/issues"
+  },
+  "homepage": "https://github.com/Jordan1211/cse341-project2#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.25.0",
+    "express": "^4.18.2",
+    "mongodb": "^4.10.0",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1"
+  }
+}

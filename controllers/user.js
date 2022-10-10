@@ -51,7 +51,7 @@ const updateById = async (req, res) => {
         { _id: ObjectId(req.params.id) },
         {
           $set: {
-            favoriteColor: req.body.favoriteColor
+            firstName: req.body.firstName
           }
         }
       );

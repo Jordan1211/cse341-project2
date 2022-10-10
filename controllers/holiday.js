@@ -47,7 +47,7 @@ const updateById = async (req, res) => {
         { _id: ObjectId(req.params.id) },
         {
           $set: {
-            favoriteColor: req.body.favoriteColor
+            name: req.body.name
           }
         }
       );
@@ -80,7 +80,7 @@ const deleteManyByName = async (req, res) => {
       .getDb()
       .db()
       .collection('holiday')
-      .deleteMany({ firstName: req.body.firstName });
+      .deleteMany({ name: req.body.name });
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
   } catch (err) {

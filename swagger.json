@@ -110,7 +110,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "favoriteColor": {
+                "childFirstName": {
                   "example": "any"
                 }
               }
@@ -162,7 +162,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "childFirstName": {
                   "example": "any"
                 }
               }
@@ -274,7 +274,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "favoriteColor": {
+                "firstName": {
                   "example": "any"
                 }
               }
@@ -429,7 +429,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "favoriteColor": {
+                "name": {
                   "example": "any"
                 }
               }
@@ -481,7 +481,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
                   "example": "any"
                 }
               }

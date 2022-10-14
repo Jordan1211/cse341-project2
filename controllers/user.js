@@ -21,7 +21,7 @@ const getSingle = async (req, res) => {
 };
 
 const createNewUser = async (req, res) => {
-  const holiday = {
+  const user = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     userName: req.body.userName,
@@ -31,7 +31,7 @@ const createNewUser = async (req, res) => {
   };
 
   try {
-    const result = await mongodb.getDb().db().collection('user').insertOne(holiday);
+    const result = await mongodb.getDb().db().collection('user').insertOne(user);
     console.log('The user was created');
     res.setHeader('Content-Type', 'application/json');
     res.status(201).json(result);

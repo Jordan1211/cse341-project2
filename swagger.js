@@ -5,8 +5,13 @@ const doc = {
     title: 'CSE-341 Project 2',
     description: 'Custody App API'
   },
+  // for prod
   host: 'custody-api.onrender.com',
   schemes: 'https'
+
+  // for test
+  // host: 'localhost:8000',
+  // schemes: 'http'
 };
 
 const outputFile = './swagger.json';

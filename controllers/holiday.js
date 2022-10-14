@@ -1,23 +1,52 @@
-const mongodb = require('../db/connect');
-const { ObjectId } = require('mongodb');
-// const Post = require('../models/Post');
+const db = require('../models');
+const Holiday = db.holiday;
 
 const getData = async (req, res) => {
-  const result = await mongodb.getDb().db().collection('holiday').find();
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+  const result = Holiday.find({});
+  // result.then((lists) => {
+  //   res.setHeader('Content-Type', 'application/json');
+  //   res.status(200).json(lists);
+  // });
+
+  result
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving users.'
+      });
+    });
+
+  //   Holiday.find()
+  //     .then((data) => {
+  //       if (!data) res.status(404).send({ message: 'Not found' });
+  //       else res.send(data[0]);
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).send({
+  //         message: 'Error retrieving',
+  //         error: err
+  //       });
+  //     });
 };
 
 const getSingle = async (req, res) => {
-  const result = await mongodb
-    .getDb()
-    .db()
-    .collection('holiday')
-    .findOne({ _id: ObjectId(req.params.id) });
+  const result = Holiday.findOne({ _id: ObjectId(req.params.id) });
   res.setHeader('Content-Type', 'application/json');
   res.status(200).json(result);
+
+  // Holiday.find({ _id: ObjectId(req.params.id) })
+  //   .then((data) => {
+  //     if (!data) res.status(404).send({ message: 'Not found' });
+  //     else res.send(data[0]);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send({
+  //       message: 'Error retrieving',
+  //       error: err
+  //     });
+  //   });
 };
 
 const createNewHoliday = async (req, res) => {
@@ -28,7 +57,7 @@ const createNewHoliday = async (req, res) => {
   };
 
   try {
-    const result = await mongodb.getDb().db().collection('holiday').insertOne(holiday);
+    const result = Holiday.insertOne(holiday);
     console.log('The holiday was created');
     res.setHeader('Content-Type', 'application/json');
     res.status(201).json(result);
@@ -39,18 +68,14 @@ const createNewHoliday = async (req, res) => {
 
 const updateById = async (req, res) => {
   try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('holiday')
-      .updateOne(
-        { _id: ObjectId(req.params.id) },
-        {
-          $set: {
-            name: req.body.name
-          }
+    const result = Holiday.updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $set: {
+          name: req.body.name
         }
-      );
+      }
+    );
     console.log('Your update has been successful');
     res.setHeader('Content-Type', 'application/json');
     res.status(204).json(result);
@@ -61,11 +86,7 @@ const updateById = async (req, res) => {
 
 const deleteById = async (req, res) => {
   try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('holiday')
-      .deleteOne({ _id: ObjectId(req.params.id) });
+    const result = Holiday.deleteOne({ _id: ObjectId(req.params.id) });
     console.log('The contact was Deleted');
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
@@ -76,11 +97,7 @@ const deleteById = async (req, res) => {
 
 const deleteManyByName = async (req, res) => {
   try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('holiday')
-      .deleteMany({ name: req.body.name });
+    const result = Holiday.deleteMany({ name: req.body.name });
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
   } catch (err) {

@@ -47,7 +47,7 @@ const createNewHoliday = async (req, res) => {
   }
 };
 
-const updateById = async (req, res) => {
+const updateNameById = async (req, res) => {
   try {
     const holidayId = req.params.id;
 
@@ -89,6 +89,6 @@ module.exports = {
   getData,
   getSingle,
   createNewHoliday,
-  updateById,
+  updateNameById,
   deleteById
 };

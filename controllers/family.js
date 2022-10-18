@@ -50,40 +50,39 @@ const createNewFamily = async (req, res) => {
   }
 };
 
-const updateById = async (req, res) => {
+const updateFirstNameById = async (req, res) => {
   try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('family')
-      .updateOne(
-        { _id: ObjectId(req.params.id) },
-        {
-          $set: {
-            childFirstName: req.body.childFirstName
-          }
+    const familyId = req.params.id;
+
+    Family.findOne({ _id: familyId }, function (err, family) {
+      family.firstName = req.body.firstName;
+
+      user.save(function (err) {
+        if (err) {
+          res.status(500).json(err || 'Some error occurred while updating the contact.');
+        } else {
+          res.status(204).send();
         }
-      );
-    console.log('Your update has been successful');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(204).json(result);
+      });
+    });
   } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while updating the family.');
+    res.status(500).json(err);
   }
 };
 
 const deleteById = async (req, res) => {
   try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('family')
-      .deleteOne({ _id: ObjectId(req.params.id) });
-    console.log('The contact was Deleted');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
+    const familyId = req.params.id;
+
+    Family.deleteOne({ _id: familyId }, function (err, result) {
+      if (err) {
+        res.status(500).json(err || 'Some error occurred while deleting the contact.');
+      } else {
+        res.status(200).send(result);
+      }
+    });
   } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while deleting the family.');
+    res.status(500).json(err || 'Some error occurred while deleting the contact.');
   }
 };
 
@@ -91,6 +90,6 @@ module.exports = {
   getData,
   getSingle,
   createNewFamily,
-  updateById,
+  updateFirstNameById,
   deleteById
 };

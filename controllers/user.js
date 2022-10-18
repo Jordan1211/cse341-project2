@@ -1,5 +1,6 @@
 const User = require('../models/user');
 // const { authSchema } = require('../db/validation');
+const passwordUtil = require('../db/validation');
 
 const getData = async (req, res) => {
   const result = User.find();
@@ -35,12 +36,24 @@ const createNewUser = async (req, res) => {
     lastName: req.body.lastName,
     userName: req.body.userName,
     email: req.body.email,
+    password: req.body.password,
     familyName: req.body.familyName,
     notes: req.body.notes
   };
 
   try {
-    const validate = await authSchema.validateAsync(req.body);
+    // const validate = await authSchema.validateAsync(req.body);
+    if (!req.body.username || !req.body.password) {
+      res.status(400).send({ message: 'Content can not be empty!' });
+      return;
+    }
+    const password = req.body.password;
+    const passwordCheck = passwordUtil.passwordPass(password);
+    if (passwordCheck.error) {
+      res.status(400).send({ message: passwordCheck.error });
+      return;
+    }
+
     const result = await mongodb.getDb().db().collection('user').insertOne(user);
     console.log('The user was created');
     res.setHeader('Content-Type', 'application/json');
@@ -51,42 +64,39 @@ const createNewUser = async (req, res) => {
   }
 };
 
-const updateById = async (req, res) => {
+const updateFirstNameById = async (req, res) => {
   try {
-    const result = await mongodb;
-    await mongodb
-      .getDb()
-      .db()
-      .collection('user')
-      .updateOne(
-        { _id: ObjectId(req.params.id) },
-        {
-          $set: {
-            firstName: req.body.firstName
-          }
+    const userId = req.params.id;
+
+    User.findOne({ _id: userId }, function (err, user) {
+      user.firstName = req.body.firstName;
+
+      user.save(function (err) {
+        if (err) {
+          res.status(500).json(err || 'Some error occurred while updating the contact.');
+        } else {
+          res.status(204).send();
         }
-      );
-    console.log('Your update has been successful');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(204).json(result);
+      });
+    });
   } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while updating the user.');
+    res.status(500).json(err);
   }
 };
 
 const deleteById = async (req, res) => {
   try {
-    const result = await mongodb;
-    await mongodb
-      .getDb()
-      .db()
-      .collection('user')
-      .deleteOne({ _id: ObjectId(req.params.id) });
-    console.log('The contact was Deleted');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
+    const userId = req.params.id;
+
+    User.deleteOne({ _id: userId }, function (err, result) {
+      if (err) {
+        res.status(500).json(err || 'Some error occurred while deleting the contact.');
+      } else {
+        res.status(200).send(result);
+      }
+    });
   } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while deleting the user.');
+    res.status(500).json(err || 'Some error occurred while deleting the contact.');
   }
 };
 
@@ -94,6 +104,6 @@ module.exports = {
   getData,
   getSingle,
   createNewUser,
-  updateById,
+  updateFirstNameById,
   deleteById
 };

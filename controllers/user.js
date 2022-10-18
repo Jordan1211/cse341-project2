@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const { authSchema } = require('../db/validation');
+// const { authSchema } = require('../db/validation');
 
 const getData = async (req, res) => {
   const result = User.find();

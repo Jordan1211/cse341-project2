@@ -39,7 +39,7 @@ Content-Type: application/json
 /////////////////////////////////////////////////////// WEEK 6
 
 
-### Local app GET holiday specific holiday record
+### Local app PUT holiday specific holiday record
 PUT http://localhost:8000/holiday/6344a66b8ed28722af092910
 Content-Type: application/json
 
@@ -47,5 +47,5 @@ Content-Type: application/json
   "name": "TEST3"
 }
 
-### Local app GET holiday specific holiday record
-DELETE  http://localhost:8000/holiday/6344a66b8ed28722af092910
+### Local app DELETE holiday specific holiday record
+DELETE  http://localhost:8000/holiday/634e2453ad2596c339173568

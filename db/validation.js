@@ -1,13 +1,13 @@
-const Joi = require('@hapi/joi');
+// const Joi = require('@hapi/joi');
 
-const authSchema = Joi.object({
-  email: Joi.string().email().lowercase().required(),
-  password: Joi.string().min(8).required()
-});
+// const authSchema = Joi.object({
+//   email: Joi.string().email().lowercase().required(),
+//   password: Joi.string().min(8).required()
+// });
 
-module.exports = {
-  authSchema
-};
+// module.exports = {
+//   authSchema
+// };
 
 const passwordComplexity = require('joi-password-complexity');
 const complexityOptions = {

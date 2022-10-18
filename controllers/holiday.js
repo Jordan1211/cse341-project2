@@ -1,106 +1,87 @@
 const Holiday = require('../models/holiday');
 
 const getData = async (req, res) => {
-  const result = Holiday.find({});
-  // result.then((lists) => {
-  //   res.setHeader('Content-Type', 'application/json');
-  //   res.status(200).json(lists);
-  // });
-
+  const result = Holiday.find();
   result
-    .then((data) => {
-      res.send(data);
+    .then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
     })
     .catch((err) => {
       res.status(500).send({
         message: err.message || 'Some error occurred while retrieving users.'
       });
     });
-
-  //   Holiday.find()
-  //     .then((data) => {
-  //       if (!data) res.status(404).send({ message: 'Not found' });
-  //       else res.send(data[0]);
-  //     })
-  //     .catch((err) => {
-  //       res.status(500).send({
-  //         message: 'Error retrieving',
-  //         error: err
-  //       });
-  //     });
 };
 
 const getSingle = async (req, res) => {
-  const result = Holiday.findOne({ _id: ObjectId(req.params.id) });
-  res.setHeader('Content-Type', 'application/json');
-  res.status(200).json(result);
-
-  // Holiday.find({ _id: ObjectId(req.params.id) })
-  //   .then((data) => {
-  //     if (!data) res.status(404).send({ message: 'Not found' });
-  //     else res.send(data[0]);
-  //   })
-  //   .catch((err) => {
-  //     res.status(500).send({
-  //       message: 'Error retrieving',
-  //       error: err
-  //     });
-  //   });
+  Holiday.find({ _id: req.params.id })
+    .then((data) => {
+      if (!data) res.status(404).send({ message: 'Not found' });
+      else res.send(data[0]);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: 'Error retrieving',
+        error: err
+      });
+    });
 };
 
 const createNewHoliday = async (req, res) => {
-  const holiday = {
-    name: req.body.name,
-    occurence: req.body.occurence,
-    group: req.body.group
-  };
-
   try {
-    const result = Holiday.insertOne(holiday);
-    console.log('The holiday was created');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(201).json(result);
+    const holiday = new Holiday(req.body);
+    holiday
+      .save()
+      .then((data) => {
+        console.log(data);
+        res.status(201).send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || 'Some error occurred while creating the holiday.'
+        });
+      });
   } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while creating the holiday.');
+    res.status(500).json(err);
   }
 };
 
 const updateById = async (req, res) => {
   try {
-    const result = Holiday.updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $set: {
-          name: req.body.name
+    const holidayId = req.params.id;
+
+    Holiday.findOne({ _id: holidayId }, function (err, holiday) {
+      holiday.name = req.body.name;
+      // holiday.occurence = req.body.occurence;
+      // holiday.group = req.body.group;
+
+      holiday.save(function (err) {
+        if (err) {
+          res.status(500).json(err || 'Some error occurred while updating the contact.');
+        } else {
+          res.status(204).send();
         }
-      }
-    );
-    console.log('Your update has been successful');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(204).json(result);
+      });
+    });
   } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while updating the holiday.');
+    res.status(500).json(err);
   }
 };
 
 const deleteById = async (req, res) => {
   try {
-    const result = Holiday.deleteOne({ _id: ObjectId(req.params.id) });
-    console.log('The contact was Deleted');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
-  } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while deleting the holiday.');
-  }
-};
+    const holidayId = req.params.id;
 
-const deleteManyByName = async (req, res) => {
-  try {
-    const result = Holiday.deleteMany({ name: req.body.name });
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
+    Holiday.deleteOne({ _id: holidayId }, function (err, result) {
+      if (err) {
+        res.status(500).json(err || 'Some error occurred while deleting the contact.');
+      } else {
+        res.status(200).send(result);
+      }
+    });
   } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while deleting the many holidays.');
+    res.status(500).json(err || 'Some error occurred while deleting the contact.');
   }
 };
 
@@ -109,6 +90,5 @@ module.exports = {
   getSingle,
   createNewHoliday,
   updateById,
-  deleteById,
-  deleteManyByName
+  deleteById
 };

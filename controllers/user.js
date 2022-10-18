@@ -1,24 +1,32 @@
-const mongodb = require('../db/connect');
-const { ObjectId } = require('mongodb');
-// const Post = require('../models/Post');
+const User = require('../models/user');
 const { authSchema } = require('../db/validation');
 
 const getData = async (req, res) => {
-  const result = await mongodb.getDb().db().collection('user').find();
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+  const result = User.find();
+  result
+    .then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving users.'
+      });
+    });
 };
 
 const getSingle = async (req, res) => {
-  const result = await mongodb
-    .getDb()
-    .db()
-    .collection('user')
-    .findOne({ _id: ObjectId(req.params.id) });
-  res.setHeader('Content-Type', 'application/json');
-  res.status(200).json(result);
+  User.find({ _id: req.params.id })
+    .then((data) => {
+      if (!data) res.status(404).send({ message: 'Not found' });
+      else res.send(data[0]);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: 'Error retrieving',
+        error: err
+      });
+    });
 };
 
 const createNewUser = async (req, res) => {
@@ -82,22 +90,10 @@ const deleteById = async (req, res) => {
   }
 };
 
-const deleteManyByName = async (req, res) => {
-  try {
-    const result = await mongodb;
-    await mongodb.getDb().db().collection('user').deleteMany({ firstName: req.body.firstName });
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
-  } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while deleting the many users.');
-  }
-};
-
 module.exports = {
   getData,
   getSingle,
   createNewUser,
   updateById,
-  deleteById,
-  deleteManyByName
+  deleteById
 };

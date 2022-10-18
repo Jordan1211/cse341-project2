@@ -1,5 +1,10 @@
 const { index } = require('../controllers');
-const routes = require('express').Router();
+const router = require('express').Router();
 
-routes.get('/', index);
-module.exports = routes;
+router.get('/', index);
+router.use('/', require('./swagger'));
+router.use('/user', require('./user'));
+router.use('/holiday', require('./holiday'));
+router.use('/family', require('./family'));
+
+module.exports = router;

@@ -9,144 +9,22 @@
   "basePath": "/",
   "schemes": "https",
   "paths": {
-    "/family/": {
+    "/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
           }
         }
-      },
-      "post": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "familyName": {
-                  "example": "any"
-                },
-                "contracts": {
-                  "example": "any"
-                },
-                "childLastName": {
-                  "example": "any"
-                },
-                "childFirstName": {
-                  "example": "any"
-                },
-                "childDOB": {
-                  "example": "any"
-                },
-                "parent1userId": {
-                  "example": "any"
-                },
-                "parent2userId": {
-                  "example": "any"
-                },
-                "holidayId": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
       }
     },
-    "/family/{id}": {
+    "/api-docs": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "childFirstName": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "parameters": [],
+        "responses": {}
       }
     },
     "/user/": {
@@ -159,6 +37,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -209,9 +90,6 @@
     "/user/{id}": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -223,6 +101,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -286,6 +170,112 @@
     "/holiday/": {
       "get": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/holiday/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/family/": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -308,13 +298,28 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "familyName": {
                   "example": "any"
                 },
-                "occurence": {
+                "contracts": {
                   "example": "any"
                 },
-                "group": {
+                "childLastName": {
+                  "example": "any"
+                },
+                "childFirstName": {
+                  "example": "any"
+                },
+                "childDOB": {
+                  "example": "any"
+                },
+                "parent1userId": {
+                  "example": "any"
+                },
+                "parent2userId": {
+                  "example": "any"
+                },
+                "holidayId": {
                   "example": "any"
                 }
               }
@@ -331,12 +336,9 @@
         }
       }
     },
-    "/holiday/{id}": {
+    "/family/{id}": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -348,6 +350,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -369,7 +377,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "childFirstName": {
                   "example": "any"
                 }
               }
@@ -404,17 +412,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }

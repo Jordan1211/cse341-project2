@@ -1,23 +1,31 @@
-const mongodb = require('../db/connect');
-const { ObjectId } = require('mongodb');
-// const Post = require('../models/Post');
+const Family = require('../models/family');
 
 const getData = async (req, res) => {
-  const result = await mongodb.getDb().db().collection('family').find();
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+  const result = Family.find();
+  result
+    .then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving users.'
+      });
+    });
 };
 
 const getSingle = async (req, res) => {
-  const result = await mongodb
-    .getDb()
-    .db()
-    .collection('family')
-    .findOne({ _id: ObjectId(req.params.id) });
-  res.setHeader('Content-Type', 'application/json');
-  res.status(200).json(result);
+  Family.find({ _id: req.params.id })
+    .then((data) => {
+      if (!data) res.status(404).send({ message: 'Not found' });
+      else res.send(data[0]);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: 'Error retrieving',
+        error: err
+      });
+    });
 };
 
 const createNewFamily = async (req, res) => {
@@ -79,25 +87,10 @@ const deleteById = async (req, res) => {
   }
 };
 
-const deleteManyByName = async (req, res) => {
-  try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('family')
-      .deleteMany({ childFirstName: req.body.childFirstName });
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
-  } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while deleting the many families.');
-  }
-};
-
 module.exports = {
   getData,
   getSingle,
   createNewFamily,
   updateById,
-  deleteById,
-  deleteManyByName
+  deleteById
 };

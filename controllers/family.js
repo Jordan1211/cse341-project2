@@ -29,33 +29,30 @@ const getSingle = async (req, res) => {
 };
 
 const createNewFamily = async (req, res) => {
-  const family = {
-    familyName: req.body.familyName,
-    contracts: req.body.contracts,
-    childLastName: req.body.childLastName,
-    childFirstName: req.body.childFirstName,
-    childDOB: req.body.childDOB,
-    parent1userId: req.body.parent1userId,
-    parent2userId: req.body.parent2userId,
-    holidayId: req.body.holidayId
-  };
-
   try {
-    const result = await mongodb.getDb().db().collection('family').insertOne(family);
-    console.log('The family was created');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(201).json(result);
+    const family = new Family(req.body);
+    family
+      .save()
+      .then((data) => {
+        console.log(data);
+        res.status(201).send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || 'Some error occurred while creating the holiday.'
+        });
+      });
   } catch (err) {
-    res.status(500).json(response.error || 'Some error occurred while creating the family.');
+    res.status(500).json(err);
   }
 };
 
-const updateFirstNameById = async (req, res) => {
+const updateFamilyNameById = async (req, res) => {
   try {
     const familyId = req.params.id;
 
     Family.findOne({ _id: familyId }, function (err, family) {
-      family.firstName = req.body.firstName;
+      family.familyName = req.body.familyName;
 
       user.save(function (err) {
         if (err) {
@@ -90,6 +87,6 @@ module.exports = {
   getData,
   getSingle,
   createNewFamily,
-  updateFirstNameById,
+  updateFamilyNameById,
   deleteById
 };

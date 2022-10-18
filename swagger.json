@@ -45,9 +45,6 @@
       },
       "post": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "body",
@@ -55,28 +52,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "userName": {
-                  "example": "any"
-                },
-                "email": {
+                "username": {
                   "example": "any"
                 },
                 "password": {
-                  "example": "any"
-                },
-                "familyName": {
-                  "example": "any"
-                },
-                "notes": {
-                  "example": "any"
-                },
-                "username": {
                   "example": "any"
                 }
               }
@@ -291,44 +270,7 @@
       },
       "post": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "familyName": {
-                  "example": "any"
-                },
-                "contracts": {
-                  "example": "any"
-                },
-                "childLastName": {
-                  "example": "any"
-                },
-                "childFirstName": {
-                  "example": "any"
-                },
-                "childDOB": {
-                  "example": "any"
-                },
-                "parent1userId": {
-                  "example": "any"
-                },
-                "parent2userId": {
-                  "example": "any"
-                },
-                "holidayId": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "201": {
             "description": "Created"
@@ -377,7 +319,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "familyName": {
                   "example": "any"
                 }
               }

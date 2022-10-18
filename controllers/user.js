@@ -1,5 +1,4 @@
 const User = require('../models/user');
-// const { authSchema } = require('../db/validation');
 const passwordUtil = require('../db/validation');
 
 const getData = async (req, res) => {
@@ -31,18 +30,7 @@ const getSingle = async (req, res) => {
 };
 
 const createNewUser = async (req, res) => {
-  const user = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    userName: req.body.userName,
-    email: req.body.email,
-    password: req.body.password,
-    familyName: req.body.familyName,
-    notes: req.body.notes
-  };
-
   try {
-    // const validate = await authSchema.validateAsync(req.body);
     if (!req.body.username || !req.body.password) {
       res.status(400).send({ message: 'Content can not be empty!' });
       return;
@@ -54,13 +42,20 @@ const createNewUser = async (req, res) => {
       return;
     }
 
-    const result = await mongodb.getDb().db().collection('user').insertOne(user);
-    console.log('The user was created');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(201).json(result);
+    const user = new User(req.body);
+    user
+      .save()
+      .then((data) => {
+        console.log(data);
+        res.status(201).send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || 'Some error occurred while creating the holiday.'
+        });
+      });
   } catch (err) {
-    if (error.isJoi === true) error.status = 422;
-    res.status(500).json(response.error || 'Some error occurred while creating the user.');
+    res.status(500).json(err);
   }
 };
 

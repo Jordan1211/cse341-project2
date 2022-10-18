@@ -1,6 +1,7 @@
 const mongodb = require('../db/connect');
 const { ObjectId } = require('mongodb');
 // const Post = require('../models/Post');
+const { authSchema } = require('../db/validation');
 
 const getData = async (req, res) => {
   const result = await mongodb.getDb().db().collection('user').find();
@@ -31,11 +32,13 @@ const createNewUser = async (req, res) => {
   };
 
   try {
+    const validate = await authSchema.validateAsync(req.body);
     const result = await mongodb.getDb().db().collection('user').insertOne(user);
     console.log('The user was created');
     res.setHeader('Content-Type', 'application/json');
     res.status(201).json(result);
   } catch (err) {
+    if (error.isJoi === true) error.status = 422;
     res.status(500).json(response.error || 'Some error occurred while creating the user.');
   }
 };

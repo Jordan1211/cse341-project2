@@ -1,5 +1,4 @@
-const db = require('../models');
-const Holiday = db.holiday;
+const Holiday = require('../models/holiday');
 
 const getData = async (req, res) => {
   const result = Holiday.find({});

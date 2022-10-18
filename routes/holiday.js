@@ -10,6 +10,6 @@ router.post('/', controller.createNewHoliday);
 router.put('/:id', controller.updateById);
 
 router.delete('/:id', controller.deleteById);
-router.delete('/deleteMany', controller.deleteManyByName);
+// router.delete('/deleteMany', controller.deleteManyByName);
 
 module.exports = router;

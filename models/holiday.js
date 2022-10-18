@@ -1,4 +1,4 @@
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // const PostSchema = mongoose.Schema({
 //   firstName: {
@@ -25,23 +25,20 @@
 
 // module.exports = mongoose.model('contacts', PostSchema);
 
-module.exports = (mongoose) => {
-  const holiday = mongoose.model(
-    'holiday',
-    mongoose.Schema({
-      name: {
-        type: String
-      },
-      occurence: {
-        type: String
-      },
-      group: {
-        type: String
-      }
-    })
-  );
+// module.exports = (mongoose) => {
+const holidaySchema = mongoose.Schema(
+  {
+    name: {
+      type: String
+    },
+    occurence: {
+      type: String
+    },
+    group: {
+      type: String
+    }
+  },
+  { collection: 'holiday' }
+);
 
-  return holiday;
-};
-
-//mongodb joins
+module.exports = mongoose.model('holiday', holidaySchema);

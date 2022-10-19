@@ -30,6 +30,10 @@ const getSingle = async (req, res) => {
 
 const createNewHoliday = async (req, res) => {
   try {
+    if (!req.body.name || !req.body.occurence || !req.body.group) {
+      res.status(400).send({ message: 'Content can not be empty!' });
+      return;
+    }
     const holiday = new Holiday(req.body);
     holiday
       .save()

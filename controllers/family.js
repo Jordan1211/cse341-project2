@@ -30,6 +30,19 @@ const getSingle = async (req, res) => {
 
 const createNewFamily = async (req, res) => {
   try {
+    if (
+      !req.body.familyName ||
+      !req.body.contracts ||
+      !req.body.childLastName ||
+      !req.body.childFirstName ||
+      !req.body.childDOB ||
+      !req.body.parent1userId ||
+      !req.body.parent2userId ||
+      !req.body.holidayId
+    ) {
+      res.status(400).send({ message: 'Content can not be empty!' });
+      return;
+    }
     const family = new Family(req.body);
     family
       .save()

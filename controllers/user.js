@@ -31,7 +31,15 @@ const getSingle = async (req, res) => {
 
 const createNewUser = async (req, res) => {
   try {
-    if (!req.body.username || !req.body.password) {
+    if (
+      !req.body.username ||
+      !req.body.password ||
+      !req.body.firstName ||
+      !req.body.lastName ||
+      !req.body.email ||
+      !req.body.familyName ||
+      !req.body.notes
+    ) {
       res.status(400).send({ message: 'Content can not be empty!' });
       return;
     }

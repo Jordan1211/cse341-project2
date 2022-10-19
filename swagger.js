@@ -6,12 +6,12 @@ const doc = {
     description: 'Custody App API'
   },
   // for prod
-  // host: 'custody-api.onrender.com',
-  // schemes: 'https'
+  host: 'custody-api.onrender.com',
+  schemes: 'https'
 
   // for test
-  host: 'localhost:8000',
-  schemes: 'http'
+  // host: 'localhost:8000',
+  // schemes: 'http'
 };
 
 const outputFile = './swagger.json';

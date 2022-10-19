@@ -4,7 +4,7 @@ const getData = async (req, res) => {
   const result = Holiday.find();
   result
     .then((lists) => {
-      res.setHeader('Content-Type', 'application/json');
+      // res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);
     })
     .catch((err) => {

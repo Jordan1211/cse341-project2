@@ -2,11 +2,13 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const port = process.env.PORT;
 const app = express();
 
 app
+  .use(cors())
   .use(bodyParser.json())
   .use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -14,7 +16,6 @@ app
       'Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
     );
-    res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow_methods', 'GET, POST, PUT, DELETE, OPTIONS');
     next();
   })

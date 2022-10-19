@@ -5,9 +5,9 @@
     "description": "Custody App API",
     "version": "1.0.0"
   },
-  "host": "custody-api.onrender.com",
+  "host": "localhost:8000",
   "basePath": "/",
-  "schemes": "https",
+  "schemes": "http",
   "paths": {
     "/": {
       "get": {
@@ -30,9 +30,6 @@
     "/user/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -152,9 +149,6 @@
     "/holiday/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -255,9 +249,6 @@
     "/family/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [],
         "responses": {
           "200": {

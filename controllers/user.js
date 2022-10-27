@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const passwordUtil = require('../db/validation');
+const { check } = require('express-validator');
 
 const getData = async (req, res) => {
   const result = User.find();
@@ -42,6 +43,12 @@ const createNewUser = async (req, res) => {
     ) {
       res.status(400).send({ message: 'Content can not be empty!' });
       return;
+    }
+
+    if (req.body.email) {
+      check('email', 'Please include a valid email')
+        .isEmail()
+        .normalizeEmail({ gmail_remove_dots: true });
     }
     const password = req.body.password;
     const passwordCheck = passwordUtil.passwordPass(password);

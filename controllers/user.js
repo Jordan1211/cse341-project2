@@ -46,14 +46,15 @@ const createNewUser = async (req, res) => {
     }
 
     const email = req.body.email;
-    const emailCheck = email
-      .check('email', 'Please include a valid email')
+    const emailCheck = email;
+    check(email, 'Please include a valid email')
       .isEmail()
       .normalizeEmail({ gmail_remove_dots: true });
     if (emailCheck.error) {
-      res.status(400).send({ message: passwordCheck.error });
+      res.status(400).send({ message: emailCheck.error });
       return;
     }
+
     const password = req.body.password;
     const passwordCheck = passwordUtil.passwordPass(password);
     if (passwordCheck.error) {

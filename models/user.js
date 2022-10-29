@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema(
   {
-    identifier: {
-      type: String
-    },
+    // identifier: {
+    //   type: String
+    // },
     firstName: {
       type: String
     },

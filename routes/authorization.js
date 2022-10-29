@@ -1,8 +1,8 @@
-// const express = require('express');
-// const AuthorizationController = require('../controllers/authorization');
-// const router = express.Router();
+const express = require('express');
+const router = express.Router();
+const AuthorizationController = require('../controllers/authorization.js');
 
-// router.get('/login', AuthorizationController.login);
-// router.get('/callback', AuthorizationController.callback);
+router.get('/login', AuthorizationController.login);
+router.get('/callback', AuthorizationController.callback);
 
-// module.exports = router;
+module.exports = router;

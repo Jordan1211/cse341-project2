@@ -12,11 +12,11 @@ const complexityOptions = {
   requirementCount: 4
 };
 
-exports.emailPass = [
-  check('email', 'Please include a valid email')
+exports.emailPass = (emailToCheck) => {
+  return check(emailToCheck, 'Please include a valid email between 5 & 30 characters')
     .isEmail()
-    .normalizeEmail({ gmail_remove_dots: true })
-];
+    .isLength({ min: 5, max: 30 });
+};
 
 exports.passwordPass = (passwordToCheck) => {
   return passwordComplexity(complexityOptions, 'Password').validate(passwordToCheck);

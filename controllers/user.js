@@ -44,13 +44,6 @@ const createNewUser = async (req, res) => {
       return;
     }
 
-    const email = req.body.email;
-    const emailCheck = emailPass(email);
-    if (emailCheck.error) {
-      res.status(400).send({ message: emailCheck.error });
-      return;
-    }
-
     const password = req.body.password;
     const passwordCheck = passwordPass(password);
     if (passwordCheck.error) {
@@ -58,11 +51,19 @@ const createNewUser = async (req, res) => {
       return;
     }
 
+    const email = req.body.email;
+    const emailCheck = emailPass(email);
+    if (emailCheck.error) {
+      res.status(400).send({ message: emailCheck.error });
+      return;
+    }
+
+    console.log(emailPass);
+
     const user = new User(req.body);
     user
       .save()
       .then((data) => {
-        console.log(data);
         res.status(201).send(data);
       })
       .catch((err) => {

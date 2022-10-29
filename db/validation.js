@@ -12,12 +12,12 @@ const complexityOptions = {
   requirementCount: 4
 };
 
-exports.emailCheck = [
+exports.emailPass = [
   check('email', 'Please include a valid email')
     .isEmail()
     .normalizeEmail({ gmail_remove_dots: true })
 ];
 
-module.exports.passwordPass = (passwordToCheck) => {
+exports.passwordPass = (passwordToCheck) => {
   return passwordComplexity(complexityOptions, 'Password').validate(passwordToCheck);
 };

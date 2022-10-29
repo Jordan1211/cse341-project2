@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const validate = require('../db/validation');
+const { emailPass, passwordPass } = require('../db/validation');
 
 const getData = async (req, res) => {
   const result = User.find();
@@ -45,14 +45,14 @@ const createNewUser = async (req, res) => {
     }
 
     const email = req.body.email;
-    const emailCheck = validate.emailCheck(email);
+    const emailCheck = emailPass(email);
     if (emailCheck.error) {
       res.status(400).send({ message: emailCheck.error });
       return;
     }
 
     const password = req.body.password;
-    const passwordCheck = validate.passwordPass(password);
+    const passwordCheck = passwordPass(password);
     if (passwordCheck.error) {
       res.status(400).send({ message: passwordCheck.error });
       return;

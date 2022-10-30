@@ -9,27 +9,25 @@ const AuthorizationController = {
     }&redirect_uri=${encodeURIComponent(
       appConfig.redirectUrl
     )}&state=1234&scope=openid%20profile%20email`;
-
+    console.log(authorizationUrl);
     res.redirect(authorizationUrl);
   },
   callback: async (req, res) => {
     const response = await fetch(`${appConfig.authorizationHost}/oauth/token`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-22-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: new URLSearchParams({
         grant_type: 'authorization_code',
         client_id: appConfig.clientID,
-        client_secret: appConfig.client_secret,
-        redirect_uri: appConfig.redirectURI,
+        client_secret: appConfig.clientSecret,
+        redirect_uri: appConfig.redirectUrl,
         scope: 'openid profile email',
         code: req.query.code
       })
     });
-
     const jsonResponse = await response.json();
-
     res.json(jsonResponse);
   }
 };

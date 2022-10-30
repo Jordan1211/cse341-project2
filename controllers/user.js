@@ -5,7 +5,6 @@ const getData = async (req, res) => {
   const result = User.find();
   result
     .then((lists) => {
-      // res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);
     })
     .catch((err) => {
@@ -33,23 +32,23 @@ const createNewUser = async (req, res) => {
   try {
     if (
       !req.body.username ||
-      !req.body.password ||
+      // !req.body.password ||
       !req.body.firstName ||
       !req.body.lastName ||
-      !req.body.email ||
-      !req.body.familyName ||
-      !req.body.notes
+      !req.body.email
+      // !req.body.familyName ||
+      // !req.body.notes
     ) {
       res.status(400).send({ message: 'Content can not be empty!' });
       return;
     }
 
-    const password = req.body.password;
-    const passwordCheck = passwordPass(password);
-    if (passwordCheck.error) {
-      res.status(400).send({ message: passwordCheck.error });
-      return;
-    }
+    // const password = req.body.password;
+    // const passwordCheck = passwordPass(password);
+    // if (passwordCheck.error) {
+    //   res.status(400).send({ message: passwordCheck.error });
+    //   return;
+    // }
 
     const email = req.body.email;
     const emailCheck = emailPass(email);
@@ -58,7 +57,7 @@ const createNewUser = async (req, res) => {
       return;
     }
 
-    console.log(emailPass);
+    // console.log(emailPass);
 
     const user = new User(req.body);
     user

@@ -5,9 +5,9 @@
     "description": "Custody App API",
     "version": "1.0.0"
   },
-  "host": "localhost:8000",
+  "host": "custody-api.onrender.com",
   "basePath": "/",
-  "schemes": "http",
+  "schemes": "https",
   "paths": {
     "/": {
       "get": {
@@ -76,9 +76,6 @@
                 "username": {
                   "example": "any"
                 },
-                "password": {
-                  "example": "any"
-                },
                 "firstName": {
                   "example": "any"
                 },
@@ -86,12 +83,6 @@
                   "example": "any"
                 },
                 "email": {
-                  "example": "any"
-                },
-                "familyName": {
-                  "example": "any"
-                },
-                "notes": {
                   "example": "any"
                 }
               }

@@ -110,11 +110,12 @@
 //     res.status(500).json(err || 'Some error occurred while deleting the contact.');
 //   }
 // };
+const UsersController = {
+  index: (req, res) => {
+    res.json(req.user);
+  }
+};
 
-// module.exports = {
-//   getData,
-//   getSingle,
-//   createNewUser,
-//   updateFirstNameById,
-//   deleteById
-// };
+module.exports = {
+  UsersController
+};

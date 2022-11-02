@@ -185,6 +185,13 @@
         }
       }
     },
+    "/user/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
     "/holiday/": {
       "get": {
         "description": "",

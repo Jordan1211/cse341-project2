@@ -1,7 +1,7 @@
-const Holiday = require('../models/holiday');
+const Record = require('../models/finance');
 
 const getData = async (req, res) => {
-  const result = Holiday.find();
+  const result = Record.find();
   result
     .then((lists) => {
       res.status(200).json(lists);
@@ -14,7 +14,7 @@ const getData = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
-  Holiday.find({ _id: req.params.id })
+  Record.find({ _id: req.params.id })
     .then((data) => {
       if (!data) res.status(404).send({ message: 'Not found' });
       else res.send(data[0]);
@@ -27,14 +27,20 @@ const getSingle = async (req, res) => {
     });
 };
 
-const createNewHoliday = async (req, res) => {
+const createNewRecord = async (req, res) => {
   try {
-    if (!req.body.name || !req.body.occurence || !req.body.group) {
+    if (
+      !req.body.amount ||
+      !req.body.category ||
+      !req.body.to_parent ||
+      !req.body.from_parent ||
+      !req.body.date
+    ) {
       res.status(400).send({ message: 'Content can not be empty!' });
       return;
     }
-    const holiday = new Holiday(req.body);
-    holiday
+    const record = new Record(req.body);
+    record
       .save()
       .then((data) => {
         console.log(data);
@@ -42,7 +48,7 @@ const createNewHoliday = async (req, res) => {
       })
       .catch((err) => {
         res.status(500).send({
-          message: err.message || 'Some error occurred while creating the holiday.'
+          message: err.message || 'Some error occurred while creating the finance record.'
         });
       });
   } catch (err) {
@@ -50,16 +56,16 @@ const createNewHoliday = async (req, res) => {
   }
 };
 
-const updateNameById = async (req, res) => {
+const updateAmountById = async (req, res) => {
   try {
-    const holidayId = req.params.id;
+    const recordId = req.params.id;
 
-    Holiday.findOne({ _id: holidayId }, function (err, holiday) {
-      holiday.name = req.body.name;
+    Record.findOne({ _id: recordId }, function (err, record) {
+      record.amount = req.body.amount;
 
-      holiday.save(function (err) {
+      record.save(function (err) {
         if (err) {
-          res.status(500).json(err || 'Some error occurred while updating the contact.');
+          res.status(500).json(err || 'Some error occurred while updating the finance record.');
         } else {
           res.status(204).send();
         }
@@ -72,24 +78,25 @@ const updateNameById = async (req, res) => {
 
 const deleteById = async (req, res) => {
   try {
-    const holidayId = req.params.id;
+    const recordId = req.params.id;
 
-    Holiday.deleteOne({ _id: holidayId }, function (err, result) {
+    Record.deleteOne({ _id: recordId }, function (err, result) {
+      record;
       if (err) {
-        res.status(500).json(err || 'Some error occurred while deleting the contact.');
+        res.status(500).json(err || 'Some error occurred while deleting the finance record.');
       } else {
         res.status(200).send(result);
       }
     });
   } catch (err) {
-    res.status(500).json(err || 'Some error occurred while deleting the contact.');
+    res.status(500).json(err || 'Some error occurred while deleting the finance record.');
   }
 };
 
 module.exports = {
   getData,
   getSingle,
-  createNewHoliday,
-  updateNameById,
+  createNewRecord,
+  updateAmountById,
   deleteById
 };

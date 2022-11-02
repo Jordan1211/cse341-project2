@@ -57,8 +57,6 @@ const createNewUser = async (req, res) => {
       return;
     }
 
-    // console.log(emailPass);
-
     const user = new User(req.body);
     user
       .save()

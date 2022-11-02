@@ -17,11 +17,13 @@ const familySchema = mongoose.Schema(
     childDOB: {
       type: Date
     },
+    // Could be based off identifier
     parent1userId: {
-      type: Number
+      type: String
     },
+    // Could be based off identifier
     parent2userId: {
-      type: Number
+      type: String
     },
     holidayId: {
       type: Number

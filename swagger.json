@@ -8,6 +8,15 @@
   "host": "custody-api.onrender.com",
   "basePath": "/",
   "schemes": "https",
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Authentication token (Bearer)",
+      "example": "Bearer <your token>"
+    }
+  },
   "paths": {
     "/": {
       "get": {
@@ -579,5 +588,10 @@
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
 }

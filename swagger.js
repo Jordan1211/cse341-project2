@@ -7,11 +7,25 @@ const doc = {
   },
   // for prod
   host: 'custody-api.onrender.com',
-  schemes: 'https'
+  schemes: 'https',
 
   // for test
   // host: 'localhost:8000',
   // schemes: 'http'
+  securityDefinitions: {
+    Authorization: {
+      type: 'apiKey',
+      name: 'Authorization',
+      in: 'header',
+      description: 'Authentication token (Bearer)',
+      example: 'Bearer <your token>'
+    }
+  },
+  security: [
+    {
+      Authorization: []
+    }
+  ]
 };
 
 const outputFile = './swagger.json';

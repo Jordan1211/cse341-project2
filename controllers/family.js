@@ -1,6 +1,10 @@
 const Family = require('../models/family');
 
 const getData = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   const result = Family.find();
   result
     .then((lists) => {
@@ -15,6 +19,10 @@ const getData = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   Family.find({ _id: req.params.id })
     .then((data) => {
       if (!data) res.status(404).send({ message: 'Not found' });
@@ -29,6 +37,10 @@ const getSingle = async (req, res) => {
 };
 
 const createNewFamily = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   try {
     if (
       !req.body.familyName ||
@@ -61,6 +73,10 @@ const createNewFamily = async (req, res) => {
 };
 
 const updateFamilyNameById = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   try {
     const familyId = req.params.id;
 
@@ -81,6 +97,10 @@ const updateFamilyNameById = async (req, res) => {
 };
 
 const deleteById = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   try {
     const familyId = req.params.id;
 

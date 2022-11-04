@@ -158,7 +158,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "familyName": {
+                  "example": "any"
+                },
+                "notes": {
                   "example": "any"
                 }
               }

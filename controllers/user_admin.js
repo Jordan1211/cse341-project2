@@ -73,12 +73,32 @@ const createNewUser = async (req, res) => {
   }
 };
 
-const updateFirstNameById = async (req, res) => {
+// const updateFirstNameById = async (req, res) => {
+//   try {
+//     const userId = req.params.id;
+
+//     User.findOne({ _id: userId }, function (err, user) {
+//       user.firstName = req.body.firstName;
+
+//       user.save(function (err) {
+//         if (err) {
+//           res.status(500).json(err || 'Some error occurred while updating the contact.');
+//         } else {
+//           res.status(204).send();
+//         }
+//       });
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// };
+
+const updateFamilyNameNotesById = async (req, res) => {
   try {
     const userId = req.params.id;
 
     User.findOne({ _id: userId }, function (err, user) {
-      user.firstName = req.body.firstName;
+      (user.familyName = req.body.familyName), (user.notes = req.body.notes);
 
       user.save(function (err) {
         if (err) {
@@ -113,6 +133,6 @@ module.exports = {
   getData,
   getSingle,
   createNewUser,
-  updateFirstNameById,
+  updateFamilyNameNotesById,
   deleteById
 };

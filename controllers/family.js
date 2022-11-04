@@ -8,12 +8,11 @@ const getData = async (req, res) => {
   const result = Family.find();
   result
     .then((lists) => {
-      // res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || 'Some error occurred while retrieving users.'
+        message: err.message || 'Some error occurred while retrieving families.'
       });
     });
 };
@@ -64,7 +63,7 @@ const createNewFamily = async (req, res) => {
       })
       .catch((err) => {
         res.status(500).send({
-          message: err.message || 'Some error occurred while creating the holiday.'
+          message: err.message || 'Some error occurred while creating the family.'
         });
       });
   } catch (err) {
@@ -85,7 +84,7 @@ const updateFamilyNameById = async (req, res) => {
 
       user.save(function (err) {
         if (err) {
-          res.status(500).json(err || 'Some error occurred while updating the contact.');
+          res.status(500).json(err || 'Some error occurred while updating the family.');
         } else {
           res.status(204).send();
         }
@@ -106,13 +105,13 @@ const deleteById = async (req, res) => {
 
     Family.deleteOne({ _id: familyId }, function (err, result) {
       if (err) {
-        res.status(500).json(err || 'Some error occurred while deleting the contact.');
+        res.status(500).json(err || 'Some error occurred while deleting the family.');
       } else {
         res.status(200).send(result);
       }
     });
   } catch (err) {
-    res.status(500).json(err || 'Some error occurred while deleting the contact.');
+    res.status(500).json(err || 'Some error occurred while deleting the family.');
   }
 };
 

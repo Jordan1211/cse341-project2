@@ -1,6 +1,10 @@
 const Record = require('../models/finance');
 
 const getData = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   const result = Record.find();
   result
     .then((lists) => {
@@ -8,12 +12,16 @@ const getData = async (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || 'Some error occurred while retrieving users.'
+        message: err.message || 'Some error occurred while retrieving records.'
       });
     });
 };
 
 const getSingle = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   Record.find({ _id: req.params.id })
     .then((data) => {
       if (!data) res.status(404).send({ message: 'Not found' });
@@ -28,6 +36,10 @@ const getSingle = async (req, res) => {
 };
 
 const createNewRecord = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   try {
     if (
       !req.body.amount ||
@@ -57,6 +69,10 @@ const createNewRecord = async (req, res) => {
 };
 
 const updateAmountById = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   try {
     const recordId = req.params.id;
 
@@ -77,6 +93,10 @@ const updateAmountById = async (req, res) => {
 };
 
 const deleteById = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Not Authenticated');
+  }
+
   try {
     const recordId = req.params.id;
 

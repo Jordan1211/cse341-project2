@@ -57,7 +57,12 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       }
     },
     "/user_admin/": {
@@ -201,7 +206,12 @@
       "get": {
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       }
     },
     "/holiday/": {
@@ -340,7 +350,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       },
       "post": {
         "description": "",
@@ -392,7 +407,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       }
     },
     "/family/{id}": {
@@ -419,7 +439,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       },
       "put": {
         "description": "",
@@ -453,7 +478,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       },
       "delete": {
         "description": "",
@@ -475,7 +505,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       }
     },
     "/finance/": {
@@ -492,7 +527,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       },
       "post": {
         "description": "",
@@ -535,7 +575,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       }
     },
     "/finance/{id}": {
@@ -562,7 +607,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       },
       "put": {
         "description": "",
@@ -596,7 +646,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       },
       "delete": {
         "description": "",
@@ -618,13 +673,13 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       }
     }
-  },
-  "security": [
-    {
-      "Authorization": []
-    }
-  ]
+  }
 }

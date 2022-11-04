@@ -2,15 +2,19 @@ const appConfig = require('../db/config');
 const User = require('../models/user');
 
 const loadUser = async (req, res, next) => {
-  console.log(req.headers.authorization);
-  const authZeroUser = await fetchAuthZeroUser(req.headers.authorization);
-  const user = await findOrCreateUser(authZeroUser);
+  try {
+    console.log(req.headers.authorization);
+    const authZeroUser = await fetchAuthZeroUser(req.headers.authorization);
+    const user = await findOrCreateUser(authZeroUser);
 
-  req.user = user;
+    req.user = user;
 
-  console.log(user);
+    console.log(user);
 
-  next();
+    next();
+  } catch (_error) {
+    next();
+  }
 };
 
 const fetchAuthZeroUser = async (authorizationValue) => {
